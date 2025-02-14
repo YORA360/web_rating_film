@@ -4,17 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = ({ onSearch, searchResults }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [darkMode, setDarkMode] = useState(false); // Tambahkan state untuk theme
+  const [darkMode, setDarkMode] = useState(false); // Tambahkan state untuk tema
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    onSearch(e.target.value);
+    onSearch(e.target.value); // Panggil fungsi onSearch dengan kata kunci pencarian
   };
 
   const handleResultClick = (id) => {
     navigate(`/movie/${id}`);
-    setSearchQuery('');
+    setSearchQuery(''); // Hapus kata kunci setelah klik hasil
   };
 
   const toggleTheme = () => {
@@ -48,7 +48,6 @@ const Navbar = ({ onSearch, searchResults }) => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li><Link to="/">HomePage</Link></li>
-      
           <li><Link to="/rated">Rated</Link></li>
         </ul>
       </div>
@@ -59,10 +58,10 @@ const Navbar = ({ onSearch, searchResults }) => {
             placeholder="Search"
             className="input input-bordered w-24 md:w-auto dark:bg-slate-500"
             value={searchQuery}
-            onChange={handleSearch}
+            onChange={handleSearch} // Mengupdate searchQuery
           />
           {searchQuery && searchResults.length > 0 && (
-            <div className="absolute mt-10 z-10 bg-white dark:bg-slate-500 dark:border-black border  rounded mt-1 w-full max-h-60 overflow-y-auto">
+            <div className="absolute mt-10 z-10 bg-white dark:bg-slate-500 dark:border-black border rounded mt-1 w-full max-h-60 overflow-y-auto">
               <ul>
                 {searchResults.map(movie => (
                   <li
@@ -78,11 +77,11 @@ const Navbar = ({ onSearch, searchResults }) => {
           )}
         </div>
         <button onClick={toggleTheme} className="ml-4 btn btn-ghost">
-          {darkMode ? '🌙' : '🌞'} {/* Ikon untuk switcher */}
+          {darkMode ? '🌙' : '🌞'}
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;
